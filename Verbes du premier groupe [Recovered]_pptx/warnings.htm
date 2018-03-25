@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Title of the document</title>
+		<style>
+			@font-face {
+				font-family: SourceSansProRegular;
+				src: url(SourceSansPro-Regular.otf);
+				font-weight:400;
+			}
+			table,th,td
+			{
+				font-family:SourceSansProRegular;
+				border-collapse:collapse;
+			}
+			th,td
+			{
+				padding:5px;
+			}
+			th
+			{
+				border:solid 1px #000000;
+				background-color: #878787;
+				color: #ffffff;
+			}
+			td
+			{
+				border:solid 1px #878787;
+				background-color: #ffffff;
+				color: #878787;
+			}
+			h1
+			{
+				color:#878787;
+				font-family:SourceSansProRegular;
+			}
+		</style>
+	</head>
+
+	<body onload="displayTable()">
+		<h1 id="warning_heading" ></h1>
+		<table id="warning_table" style="left:50px; width:75%">
+			<tr>
+			  <th id="table_heading1" align='left'></th>
+			  <th id="table_heading2" align='left'></th>		
+			</tr>
+		</table>
+
+		<script>
+			var warningJson = {warningTitle : 'ÊÍÐíÑÇÊ äÔÑ Presenter',warningHeading : 'ÊÍÐíÑÇÊ ÇáäÔÑ',tableHeading1 : 'ÊÍÐíÑ',tableHeading2 : 'ÑÞã ÇáÔÑíÍÉ',warningDetails : [{warningTitle : 'áÇ ÊÔÊÛá ÇáÍÑßÇÊ Úáì ãÓÊæì ßá ÍÑÝ æßáãÉ Ýí ÅÎÑÇÌ HTML5. Èá íÊã ÊÔÛíáåÇ Úáì ãÓÊæì ÇáÝÞÑÉ.',warningSlide : ['ÇáÔÑíÍÉ 5']},],};
+			var direction = 'right'
+			function displayTable(){
+				document.title = warningJson.warningTitle;
+				
+				if(direction == "right")
+					document.body.dir = "rtl"
+				var hdg = document.getElementById("warning_heading");
+				hdg.innerText = warningJson.warningHeading;
+
+				var tHdg1 = document.getElementById("table_heading1");
+				tHdg1.innerText = warningJson.tableHeading1;
+				var tHdg2 = document.getElementById("table_heading2");
+				tHdg2.innerText = warningJson.tableHeading2;
+				tHdg1.align = direction;
+				tHdg2.align = direction;
+				
+				var tbl = document.getElementById("warning_table");
+				var tableSize = warningJson.warningDetails.length;
+				var i = 0;
+				if(tableSize > 0){
+					tbl.style.visibility = 'visible';
+					for(i = 0; i < tableSize; i++){
+						var warningObj = warningJson.warningDetails[i];
+						if(warningObj){
+							var row = tbl.insertRow(-1);
+							var cell1 = row.insertCell(0);
+							var cell2 = row.insertCell(1);
+							cell1.innerText = warningObj.warningTitle;
+							cell1.align = direction
+							cell2.innerText = warningObj.warningSlide.join("\n");
+							cell2.align = direction
+						}
+					}
+				}
+				else{
+					tbl.style.visibility = 'hidden';
+				}
+			}
+			
+		</script>
+	</body>
+
+</html>
